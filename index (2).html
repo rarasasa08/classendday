@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@400;500;700&display=swap">
+<title>桃園社大｜課程結束日回報</title>
+<style>
+  :root{
+    --bg:#f8f4f2; --card:#ffffff; --ink:#1f1e1b; --muted:#5a5450; --line:#e9dedb;
+    --main:#b8406f; --main-d:#9a345c; --main-ink:#ffffff; --main-soft:#f7e8ee; --main-soft2:#fbeef3;
+    --orange:#a64b06; --orange-soft:#fdeedd; --red:#b3261e; --red-soft:#fbe7e5; --wait:#f1ebe8;
+    --shadow:0 1px 2px rgba(60,30,40,.08),0 2px 10px rgba(60,30,40,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#1c1a19; --card:#282423; --ink:#f3eeea; --muted:#c2b8b3; --line:#3e3634;
+      --main:#e07ba3; --main-d:#ea93b5; --main-ink:#1c1a19; --main-soft:#3c2631; --main-soft2:#33242b;
+      --orange:#f2a65a; --orange-soft:#3a2a1a; --red:#ff8a80; --red-soft:#3d2422; --wait:#332e2c;
+      --shadow:none;
+    }
+  }
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{ margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Chiron GoRound TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif; }
+  button, input, select, textarea{ font-family:inherit; }
+  svg.i{ width:1.1em; height:1.1em; vertical-align:-.18em; flex:none; }
+  body{ font-size:19px; line-height:1.55; }
+  .wrap{ max-width:640px; margin:0 auto; padding:0 16px 80px; }
+  header{ padding:24px 0 6px; }
+  h1{ font-size:27px; margin:0; letter-spacing:.02em; line-height:1.35; }
+  .sub{ color:var(--muted); margin:4px 0 0; font-size:18px; }
+  .card{ background:var(--card); border-radius:18px; box-shadow:var(--shadow); border:1px solid var(--line); padding:18px 18px 18px; margin-top:14px; }
+  .intro{ white-space:pre-wrap; font-size:17px; color:var(--ink); background:var(--main-soft2); border:1px solid var(--line); border-radius:18px; padding:16px 18px; margin-top:14px; }
+  .q{ font-size:21px; font-weight:700; margin-bottom:10px; }
+  .q .req{ color:var(--main); }
+  .muted{ color:var(--muted); font-size:16px; }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .chip{ border:1.5px solid var(--line); background:var(--card); color:var(--ink); border-radius:999px; padding:6px 16px; font-size:18px; cursor:pointer; }
+  .chip.on{ background:var(--main); border-color:var(--main); color:var(--main-ink); font-weight:700; }
+  input[type=search], input[type=date]{ width:100%; font-size:21px; padding:12px 14px; border:2px solid var(--line); border-radius:12px; background:var(--bg); color:var(--ink); }
+  input:focus{ outline:none; border-color:var(--main); }
+  .list{ margin-top:12px; max-height:400px; overflow-y:auto; border:1.5px solid var(--line); border-radius:14px; background:var(--card); }
+  .opt{ padding:12px 16px; border-bottom:1px dashed var(--line); cursor:pointer; }
+  .opt:last-child{ border-bottom:none; }
+  .opt:hover, .opt:focus{ background:var(--main-soft); outline:none; }
+  .opt b{ font-size:19px; }
+  .opt .meta{ font-size:16px; color:var(--muted); }
+  .tag{ display:inline-block; font-size:15px; font-weight:700; padding:1px 10px; border-radius:999px; background:var(--main-soft); color:var(--main); margin-left:6px; white-space:nowrap; }
+  .picked{ border:2px solid var(--main); border-radius:14px; padding:14px 16px; background:var(--main-soft2); }
+  .picked b{ font-size:21px; }
+  .picked table{ margin-top:6px; font-size:17px; border-collapse:collapse; }
+  .picked td{ padding:3px 12px 3px 0; vertical-align:top; }
+  .picked td:first-child{ color:var(--muted); white-space:nowrap; }
+  .linkbtn{ background:transparent; color:var(--muted); border:1.5px solid var(--line); border-radius:14px; min-height:48px; padding:0 16px; font-size:17px; cursor:pointer; margin-top:10px; }
+  .dateinfo{ margin-top:10px; font-size:18px; }
+  .warn{ background:var(--orange-soft); color:var(--ink); border-radius:14px; padding:12px 16px; margin-top:12px; font-size:17px; }
+  .warn .wt{ color:var(--orange); font-weight:700; display:flex; gap:6px; align-items:center; }
+  .warn label{ display:flex; gap:10px; align-items:center; margin-top:10px; font-weight:700; cursor:pointer; }
+  .warn input{ width:22px; height:22px; accent-color:var(--main); }
+  .err{ background:var(--red-soft); color:var(--red); border-radius:14px; padding:12px 16px; margin-top:14px; font-size:17px; }
+  .submit{ width:100%; min-height:58px; font-size:21px; font-weight:700; border:0; border-radius:14px; background:var(--main); color:var(--main-ink); cursor:pointer; margin-top:16px; }
+  .submit:hover{ background:var(--main-d); }
+  .submit:disabled{ opacity:.55; cursor:default; }
+  .done{ text-align:center; padding:30px 20px; }
+  .done .big{ color:var(--main); }
+  .done .big svg{ width:64px; height:64px; }
+  .done h2{ margin:8px 0; font-size:24px; }
+  .again{ margin-top:16px; min-height:56px; font-size:19px; padding:0 22px; border-radius:14px; border:0; background:var(--main); color:var(--main-ink); font-weight:700; cursor:pointer; }
+  .center{ text-align:center; padding:40px 20px; color:var(--muted); }
+  .center a{ color:var(--main); }
+  .hp{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  .hide{ display:none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1 id="title">課程結束日回報</h1>
+    <p class="sub">選課程、填結束日，兩步驟就好</p>
+  </header>
+  <div id="intro" class="intro hide"></div>
+
+  <div id="loading" class="card center muted">載入課程中…</div>
+  <div id="fatal" class="card center hide"></div>
+
+  <form id="form" class="hide" autocomplete="off" novalidate onsubmit="return submitForm(event)">
+    <div class="card">
+      <div class="q">課程名稱 <span class="req">*</span></div>
+      <div id="pickArea">
+        <div class="muted" style="margin-bottom:6px">先點星期縮小範圍，或直接輸入課名、老師、地點搜尋</div>
+        <div class="chips" id="chips"></div>
+        <input type="search" id="q" placeholder="例如：瑜珈、王老師、南華教室" aria-label="搜尋課程">
+        <div class="list" id="list" role="listbox"></div>
+      </div>
+      <div id="picked" class="hide"></div>
+    </div>
+
+    <div class="card">
+      <div class="q">課程結束日 <span class="req">*</span></div>
+      <div class="muted" style="margin-bottom:8px">請填本學期最後一堂「室內」課的日期</div>
+      <input type="date" id="end" required>
+      <div id="dateInfo" class="dateinfo"></div>
+      <div id="warnBox" class="warn hide"></div>
+    </div>
+
+    <div class="hp" aria-hidden="true"><input id="website" tabindex="-1" autocomplete="off"></div>
+    <div id="errBox" class="err hide"></div>
+    <button class="submit" id="btn" type="submit">送出回報</button>
+  </form>
+
+  <div id="success" class="card done hide"></div>
+</div>
+
+<script>
+/* ▼▼▼ 把這裡換成 Apps Script 部署後的網址（結尾是 /exec），引號要保留 ▼▼▼ */
+var API_URL = 'https://script.google.com/macros/s/AKfycbwqh9c_0ngIcrKX2a0nv2IFNxkPIddyCL-8ghZSzEKRkXlobub7e0gv7txpbo4DNuGcfg/exec';
+/* ▲▲▲ 只要改這一行 ▲▲▲ */
+
+var WD = '日一二三四五六';
+var DATA = null, COURSES = [], DAY = -1, PICK = null;
+
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function dayOf(s){ var p = s.split(/[\/-]/); return new Date(Date.UTC(+p[0], +p[1]-1, +p[2])).getUTCDay(); }
+function slash(iso){ return iso ? iso.replace(/-/g, '/') : ''; }
+function sortDay(d){ return d === 0 ? 7 : d; }
+function daysText(c){ return c.days.length ? c.days.map(function(d){ return '星期' + WD.charAt(d); }).join('、') : ''; }
+
+function fatal(msg){ $('loading').classList.add('hide'); $('form').classList.add('hide'); var f = $('fatal'); f.innerHTML = msg; f.classList.remove('hide'); }
+
+/* ── 載入 ── */
+function load(){
+  if(!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(API_URL)){
+    fatal('網頁還沒設定好：請管理者把 index.html 裡的 <b>API_URL</b> 換成 Apps Script 的 /exec 網址。'); return;
+  }
+  fetch(API_URL + '?action=courses&t=' + Date.now(), { method: 'GET', redirect: 'follow' })
+    .then(function(r){ if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function(d){
+      if(!d || !d.ok) throw new Error((d && d.error) || '資料錯誤');
+      DATA = d;
+      $('title').textContent = ((d.term ? d.term + ' ' : '') + (d.title || '課程結束日回報')).trim();
+      document.title = '桃園社大｜' + (d.title || '課程結束日回報');
+      $('intro').textContent = d.intro || ''; $('intro').classList.toggle('hide', !d.intro);
+      if(!d.open){ fatal('目前沒有開放回報，謝謝您。'); return; }
+      COURSES = (d.courses || []).slice().sort(function(a, b){
+        var da = a.days.length ? sortDay(a.days[0]) : 9, db = b.days.length ? sortDay(b.days[0]) : 9;
+        return da - db || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+      });
+      if(!COURSES.length){ fatal('目前還沒有課程資料，請稍後再試。'); return; }
+      if(d.minDate) $('end').min = d.minDate.replace(/\//g, '-');
+      if(d.maxDate) $('end').max = d.maxDate.replace(/\//g, '-');
+      $('loading').classList.add('hide'); $('form').classList.remove('hide');
+      renderChips(); renderList();
+    })
+    .catch(function(){ fatal('課程載入失敗，請檢查網路後<a href="javascript:location.reload()">重新整理</a>。<br><span class="muted">若一直失敗，請聯絡社大。</span>'); });
+}
+
+/* ── 選課 ── */
+function renderChips(){
+  var used = {}; COURSES.forEach(function(c){ c.days.forEach(function(d){ used[d] = 1; }); });
+  var html = '<button type="button" class="chip' + (DAY < 0 ? ' on' : '') + '" data-d="-1">全部</button>';
+  [1,2,3,4,5,6,0].forEach(function(d){ if(used[d]) html += '<button type="button" class="chip' + (DAY === d ? ' on' : '') + '" data-d="' + d + '">' + WD.charAt(d) + '</button>'; });
+  $('chips').innerHTML = html;
+}
+$('chips').addEventListener('click', function(e){
+  var b = e.target.closest('.chip'); if(!b) return;
+  DAY = +b.getAttribute('data-d'); renderChips(); renderList();
+});
+$('q').addEventListener('input', renderList);
+
+function renderList(){
+  var words = $('q').value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  var list = COURSES.filter(function(c){
+    if(DAY >= 0 && c.days.indexOf(DAY) < 0) return false;
+    var hay = [c.name, c.teacher, c.place, c.center, c.id, c.time].join(' ').toLowerCase();
+    return words.every(function(w){ return hay.indexOf(w) >= 0; });
+  });
+  var max = 80, html = list.slice(0, max).map(function(c){
+    var i = COURSES.indexOf(c);
+    return '<div class="opt" role="option" tabindex="0" data-i="' + i + '"><b>' + esc(c.name) + '</b>' +
+      (c.end ? '<span class="tag">已回報 ' + esc(c.end.slice(5)) + '</span>' : '') +
+      '<div class="meta">' + esc([c.teacher ? c.teacher + ' 老師' : '', c.time || daysText(c), c.place].filter(Boolean).join('｜')) + '</div></div>';
+  }).join('');
+  if(list.length > max) html += '<div class="opt muted" style="cursor:default">還有 ' + (list.length - max) + ' 門課，請輸入更多字縮小範圍</div>';
+  $('list').innerHTML = html || '<div class="opt muted" style="cursor:default">找不到符合的課程，試試其他關鍵字，或改選「全部」星期</div>';
+}
+$('list').addEventListener('click', function(e){ var o = e.target.closest('.opt[data-i]'); if(o) pick(+o.getAttribute('data-i')); });
+$('list').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ var o = e.target.closest('.opt[data-i]'); if(o){ e.preventDefault(); pick(+o.getAttribute('data-i')); } } });
+
+function pick(i){
+  PICK = COURSES[i];
+  var c = PICK;
+  $('picked').innerHTML = '<div class="picked"><b>' + esc(c.name) + '</b><table>' +
+    (c.teacher ? '<tr><td>老師</td><td>' + esc(c.teacher) + '</td></tr>' : '') +
+    (c.time ? '<tr><td>上課時間</td><td>' + esc(c.time) + '</td></tr>' : '') +
+    ((c.center || c.place) ? '<tr><td>上課地點</td><td>' + esc([c.center, c.place].filter(Boolean).join('・')) + '</td></tr>' : '') +
+    '<tr><td>課程編號</td><td>' + esc(c.id) + '</td></tr>' +
+    (c.end ? '<tr><td>已回報</td><td><b>' + esc(c.end) + '</b>（再送出一次會更新成新的日期）</td></tr>' : '') +
+    '</table></div><button type="button" class="linkbtn" onclick="unpick()">選錯了，重新選</button>';
+  $('pickArea').classList.add('hide'); $('picked').classList.remove('hide');
+  hideErr(); check();
+}
+function unpick(){
+  PICK = null;
+  $('picked').classList.add('hide'); $('pickArea').classList.remove('hide');
+  $('q').focus(); check();
+}
+
+/* ── 日期檢查 ── */
+$('end').addEventListener('input', function(){ hideErr(); check(); });
+$('end').addEventListener('change', function(){ hideErr(); check(); });
+
+function warnings(){
+  var v = $('end').value, out = [];
+  if(!v) return out;
+  var s = slash(v), d = dayOf(v);
+  if(PICK && PICK.days.length && PICK.days.indexOf(d) < 0)
+    out.push('這門課是<b>' + esc(daysText(PICK)) + '</b>上課，但您選的 ' + esc(s) + ' 是<b>星期' + WD.charAt(d) + '</b>。');
+  (DATA.closures || []).forEach(function(x){
+    if(s >= x.from && s <= x.to) out.push(esc(s) + ' 是停課日' + (x.label ? '（' + esc(x.label) + '）' : '') + '。');
+  });
+  if(PICK && PICK.end && PICK.end !== s) out.push('這門課之前回報的是 ' + esc(PICK.end) + '，送出後會改成 ' + esc(s) + '。');
+  return out;
+}
+function check(){
+  var v = $('end').value;
+  $('dateInfo').innerHTML = v ? '您選的是：<b>' + esc(slash(v)) + '（星期' + WD.charAt(dayOf(v)) + '）</b>' : '';
+  var w = warnings(), box = $('warnBox');
+  if(w.length){
+    var was = $('ack') && $('ack').checked;
+    box.innerHTML = '<div class="wt"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.5v.01"/></svg> 請再確認一次</div>' + w.join('<br>') + '<label><input type="checkbox" id="ack"' + (was ? ' checked' : '') + '> 我確認日期沒錯</label>';
+    box.classList.remove('hide');
+  } else { box.innerHTML = ''; box.classList.add('hide'); }
+}
+
+/* ── 送出 ── */
+function showErr(m){ var b = $('errBox'); b.innerHTML = m; b.classList.remove('hide'); b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+function hideErr(){ $('errBox').classList.add('hide'); }
+
+function submitForm(e){
+  e.preventDefault();
+  hideErr();
+  if(!PICK){ showErr('請先選擇課程'); return false; }
+  var v = $('end').value;
+  if(!v || !/^\d{4}-\d{2}-\d{2}$/.test(v)){ showErr('請填寫課程結束日'); return false; }
+  if(DATA.minDate && slash(v) < DATA.minDate){ showErr('結束日不能早於 ' + esc(DATA.minDate)); return false; }
+  if(DATA.maxDate && slash(v) > DATA.maxDate){ showErr('結束日不能晚於 ' + esc(DATA.maxDate)); return false; }
+  if(warnings().length && !($('ack') && $('ack').checked)){ showErr('請確認上面黃色框的提醒，日期沒錯的話請打勾「我確認日期沒錯」'); return false; }
+
+  var btn = $('btn'); btn.disabled = true; btn.textContent = '送出中…';
+  fetch(API_URL, {
+    method: 'POST', redirect: 'follow',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action: 'submit', id: PICK.id, end: slash(v), website: $('website').value })
+  }).then(function(r){ return r.json(); }).then(function(d){
+    btn.disabled = false; btn.textContent = '送出回報';
+    if(!d.ok){ showErr(esc(d.error || '送出失敗，請再試一次')); return; }
+    PICK.end = d.end || slash(v);
+    $('form').classList.add('hide');
+    $('success').innerHTML = '<div class="big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg></div><h2>回報完成，謝謝您！</h2>' +
+      '<p><b>' + esc(PICK.name) + '</b><br>結束日：<b>' + esc(PICK.end) + '（星期' + WD.charAt(dayOf(PICK.end)) + '）</b></p>' +
+      (d.prev && d.prev !== PICK.end ? '<p class="muted">已從原本的 ' + esc(d.prev) + ' 更新</p>' : '') +
+      '<button class="again" onclick="again()">再回報另一門課</button>';
+    $('success').classList.remove('hide');
+    window.scrollTo(0, 0);
+  }).catch(function(){
+    btn.disabled = false; btn.textContent = '送出回報';
+    showErr('網路連線失敗，請再按一次送出。');
+  });
+  return false;
+}
+function again(){
+  $('success').classList.add('hide'); $('form').classList.remove('hide');
+  $('end').value = ''; $('q').value = ''; $('dateInfo').innerHTML = '';
+  PICK = null; $('picked').classList.add('hide'); $('pickArea').classList.remove('hide');
+  DAY = -1; renderChips();
+  check(); renderList(); window.scrollTo(0, 0);
+}
+
+load();
+</script>
+</body>
+</html>
